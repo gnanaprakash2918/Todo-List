@@ -73,6 +73,6 @@ export default class Task {
   // Get Formatted Date
   getDateFormatted() {
     const [day, month, year] = this.dueDate.split('/');
-    return `${month}/${day}/${year}`;
+    return `${year}/${month}/${day}`;
   }
 }

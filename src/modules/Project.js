@@ -1,9 +1,11 @@
+import { format, isEqual } from 'date-fns';
 export default class Project {
   constructor(name) {
     this.name = name;
     this.tasks = [];
   }
 
+  // Name
   setName(name) {
     this.name = name;
   }
@@ -12,6 +14,7 @@ export default class Project {
     return this.name;
   }
 
+  // Tasks
   setTasks(tasks) {
     this.tasks = tasks;
   }
@@ -20,6 +23,7 @@ export default class Project {
     return this.tasks;
   }
 
+  // Single Task
   getTask(taskName) {
     return this.tasks.find((task) => {
       task.getName() === taskName;
@@ -36,8 +40,16 @@ export default class Project {
   }
 
   deleteTask(taskName) {
+    if (!this.contains(newTask.getName())) return;
     this.tasks = this.tasks.filter((task) => {
       return task.getName() !== taskName;
+    });
+  }
+
+  getTasksByDate(date = new Date()) {
+    return this.tasks.filter((task) => {
+      const taskDate = toDate(new Date(task.getDateFormatted()));
+      return isEqual(taskDate, date);
     });
   }
 }
