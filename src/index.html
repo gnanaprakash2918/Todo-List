@@ -18,22 +18,22 @@
       <div class="left-side-panel">
         <div class="tasks-section">
           <div class="inbox-btn btn">
-            <img src="./Images/inbox-icon.png" alt="" />
+            <img src="./Images/inbox-icon.png" alt="inbox-icon" />
             <span>Inbox</span>
           </div>
 
           <div class="today-btn btn">
-            <img src="./Images/today-icon.png" alt="" />
+            <img src="./Images/today-icon.png" alt="today-icon" />
             <span>Today</span>
           </div>
 
           <div class="week-btn btn">
-            <img src="./Images/this-week-icon.png" alt="" />
+            <img src="./Images/this-week-icon.png" alt="this-week-icon" />
             <span>This Week</span>
           </div>
 
           <div class="important-btn btn">
-            <img src="./Images/important-icon.png" alt="" />
+            <img src="./Images/important-icon.png" alt="important-icon" />
             <span>Important</span>
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="projects-section">
           <h2>Projects</h2>
           <div class="add-project-btn btn">
-            <img src="./Images/add-icon.png" alt="" />
+            <img src="./Images/add-icon.png" alt="add-icon" />
             <span>Add Project</span>
           </div>
         </div>
@@ -51,11 +51,55 @@
         <h1>Inbox</h1>
         <div class="tasks-list">
           <div class="add-task btn">
-            <img src="./Images/add-icon.png" alt="" />
+            <img src="./Images/add-icon.png" alt="add-icon" />
             <span>Add Task</span>
           </div>
         </div>
       </div>
     </main>
+
+    <div class="add-task-modal">
+      <!-- <label for="task-name">Task Name</label> -->
+      <input
+        type="text"
+        name="task-name"
+        id="task-name"
+        placeholder="Enter Task Name"
+        required
+      />
+
+      <!-- <label for="task-desc">Description</label> -->
+      <input
+        type="text"
+        name="task-desc"
+        id="task-desc"
+        placeholder="Task Description"
+      />
+
+      <!-- <label for="task-notes">Notes</label> -->
+      <textarea
+        name="task-notes"
+        id="task-notes"
+        placeholder="Task Notes"
+      ></textarea>
+
+      <!-- <label for="due-date">Due Date</label> -->
+      <input
+        type="text"
+        id="due-date"
+        name="due-date"
+        placeholder="Due Date"
+        onfocus="this.type = 'date'"
+        onblur="this.type = 'text'"
+      />
+
+      <!-- <label for="priority">Task Priority</label> -->
+      <select name="priority" id="priority">
+        <option value="" disabled selected>Select Priority</option>
+        <option value="low">1 Low</option>
+        <option value="normal">2 Normal</option>
+        <option value="high">3 High</option>
+      </select>
+    </div>
   </body>
 </html>

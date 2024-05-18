@@ -5,7 +5,7 @@ export default class Task {
     description = '',
     note = '',
     completionStatus = false,
-    priority
+    priority = 1
   ) {
     this.name = name;
     this.dueDate = dueDate;
