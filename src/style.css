@@ -7,6 +7,11 @@
   font-family: 'Outfit', sans-serif;
 }
 
+body,
+html {
+  height: 100%;
+}
+
 :root {
   --columbia-blue: #b9d6f2ff;
   --oxford-blue: #061a40ff;
@@ -36,4 +41,18 @@
 .header img {
   height: 100%;
   object-fit: contain;
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+.left-side-panel {
+  width: 25%;
+  flex-direction: column;
+}
+
+.right-side-panel {
+  width: 75%;
 }
