@@ -7,6 +7,33 @@
   font-family: 'Outfit', sans-serif;
 }
 
-p {
-  color: red;
+:root {
+  --columbia-blue: #b9d6f2ff;
+  --oxford-blue: #061a40ff;
+  --sapphire: #0353a4ff;
+  --bice-blue: #006daaff;
+  --prussian-blue: #003559ff;
+}
+
+.header {
+  display: flex;
+  height: 120px;
+  padding: 2rem;
+  background-color: var(--columbia-blue);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  margin-left: 1.5rem;
+}
+
+/*Preserve aspect ratio*/
+.header img {
+  height: 100%;
+  object-fit: contain;
 }
