@@ -14,18 +14,16 @@ html {
 
 :root {
   --columbia-blue: #b9d6f2ff;
-  --uranian-blue: #a3d9ffff;
-  --chinese-violet: #7e6b8fff;
-  --celadon: #96e6b3ff;
-  --amaranth: #da3e52ff;
-  --maize: #f2e94eff;
+  --nav-color: #adb5bd;
+  --main-color: #e9ecef;
+  --btn-color: #ced4da;
 }
 
 .header {
   display: flex;
   height: 120px;
   padding: 2rem;
-  background-color: var(--columbia-blue);
+  background-color: var(--nav-color);
   justify-content: flex-start;
   align-items: center;
 }
@@ -47,6 +45,7 @@ html {
 main {
   display: flex;
   height: 100%;
+  background-color: var(--main-color);
 }
 
 .left-side-panel {
@@ -71,9 +70,18 @@ main {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: var(--uranian-blue);
+  background-color: var(--btn-color);
   width: 100%;
 }
 
+.tasks-section {
+  margin-bottom: 40px;
+}
+
+.projects-section h2 {
+  margin-bottom: 20px;
+}
+
 .btn:hover {
+  opacity: 0.8;
 }
