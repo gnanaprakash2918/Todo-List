@@ -84,6 +84,10 @@ main {
   background-color: var(--french-gray);
   width: 100%;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .tasks-section {
@@ -102,4 +106,8 @@ main {
 .btn img {
   height: 20px;
   width: 20px;
+}
+
+.btn img {
+  width: 50%;
 }
