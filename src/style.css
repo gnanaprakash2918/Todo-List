@@ -14,10 +14,11 @@ html {
 
 :root {
   --columbia-blue: #b9d6f2ff;
-  --oxford-blue: #061a40ff;
-  --sapphire: #0353a4ff;
-  --bice-blue: #006daaff;
-  --prussian-blue: #003559ff;
+  --uranian-blue: #a3d9ffff;
+  --chinese-violet: #7e6b8fff;
+  --celadon: #96e6b3ff;
+  --amaranth: #da3e52ff;
+  --maize: #f2e94eff;
 }
 
 .header {
@@ -51,8 +52,28 @@ main {
 .left-side-panel {
   width: 25%;
   flex-direction: column;
+  padding: 20px;
 }
 
 .right-side-panel {
   width: 75%;
+  padding: 20px;
+}
+
+.tasks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--uranian-blue);
+  width: 100%;
+}
+
+.btn:hover {
 }
