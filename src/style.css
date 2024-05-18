@@ -111,3 +111,9 @@ main {
 .btn span {
   width: 50%;
 }
+
+/* Override btn styles for add btn */
+.add-task {
+  justify-content: flex-start;
+  gap: 1rem;
+}
