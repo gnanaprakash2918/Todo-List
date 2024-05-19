@@ -28,8 +28,76 @@ function createProjectElement(project) {
   element.appendChild(spanElement);
 
   // event listener
+  element.addEventListener('click', () => {
+    const currProjTitle = document.querySelector('.right-side-panel h1');
+    currProjTitle.innerText = project.getName();
+
+    const tasksList = document.querySelector('.right-side-panel');
+  });
 
   return element;
+}
+
+function createTaskElement(task) {
+  const div = document.createElement('div');
+  div.classList.add('btn', 'task-element');
+
+  const left = document.createElement('div');
+  left.classList.add('task-element-left');
+
+  const right = document.createElement('div');
+  right.classList.add('task-element-right');
+
+  const nameDiv = document.createElement('div');
+  const nameSpan = document.createElement('span');
+  nameSpan.innerText = `Task : ${task.getName()}`;
+  nameDiv.appendChild(nameSpan);
+  left.appendChild(nameDiv);
+
+  const descDiv = document.createElement('div');
+  const descSpan = document.createElement('span');
+  descSpan.innerText = `Description : ${task.getDescription()}`;
+  descDiv.appendChild(descSpan);
+  left.appendChild(descDiv);
+
+  const noteDiv = document.createElement('div');
+  const noteSpan = document.createElement('span');
+  noteSpan.innerText = `Notes : ${task.getNote()}`;
+  noteDiv.appendChild(noteSpan);
+  left.appendChild(noteDiv);
+
+  const dueDiv = document.createElement('div');
+  const dueSpan = document.createElement('span');
+  dueSpan.innerText = `Due Date : ${task.getDate()}`;
+  dueDiv.appendChild(dueSpan);
+  right.appendChild(dueDiv);
+
+  const completionDiv = document.createElement('div');
+  const completionSpan = document.createElement('span');
+  completionSpan.innerText = `Completion Status : Not Completed`;
+  completionDiv.appendChild(completionSpan);
+  right.appendChild(completionDiv);
+
+  const priorityDiv = document.createElement('div');
+  const prioritySpan = document.createElement('span');
+  prioritySpan.innerText = `Priority : ${task.getPriority()}`;
+  priorityDiv.appendChild(prioritySpan);
+  right.appendChild(priorityDiv);
+
+  const last = document.createElement('div');
+  const completedBtn = document.createElement('button');
+  completedBtn.innerText = 'Mark Complete';
+  completedBtn.classList.add('status-btn', 'btn');
+
+  completedBtn.addEventListener('click', () => {});
+
+  last.appendChild(completedBtn);
+
+  div.appendChild(left);
+  div.appendChild(right);
+  div.appendChild(last);
+
+  return div;
 }
 
 const addTaskBtn = document.querySelector('.add-task');
@@ -87,7 +155,7 @@ addTaskBtn.addEventListener('click', () => {
     const taskDesc = document.querySelector('#task-desc');
     const taskNotes = document.querySelector('#task-notes');
     const dueDate = document.querySelector('#due-date');
-    const priority = document.querySelector('#priority').value;
+    const priority = document.querySelector('#priority');
 
     if (taskName.value.trim() === '') {
       taskName.reportValidity();
@@ -95,23 +163,43 @@ addTaskBtn.addEventListener('click', () => {
       return;
     }
 
+    console.log(
+      taskName.value.trim(),
+      dueDate.value.trim(),
+      taskDesc.value.trim(),
+      taskNotes.value.trim(),
+      false,
+      priority.value.trim()
+    );
+
+    if (priority.value.trim() === '') priority.value = '2';
+
     let newTask = new Task(
       taskName.value.trim(),
       dueDate.value.trim(),
       taskDesc.value.trim(),
       taskNotes.value.trim(),
       false,
-      priority.value
+      priority.value.trim()
     );
 
-    // Get Project idx
-    const projName = 'Inbox';
-    const project = todoList.getProject(projName);
+    console.log(newTask);
+
+    const currProjTitle = document.querySelector(
+      '.right-side-panel h1'
+    ).innerText;
+
+    const project = todoList.getProject(currProjTitle);
 
     if (project) {
       project.addTask(newTask);
-      console.log(todoList.getProject(projName));
-      console.log();
+      const element = createTaskElement(newTask);
+
+      const projectContainer = document.querySelector('.tasks-list');
+      projectContainer.appendChild(element);
+
+      console.log(currProjTitle, todoList);
+      Storage.addTask(currProjTitle, newTask);
       closeModal();
     }
   });
@@ -158,13 +246,10 @@ addProjectBtn.addEventListener('click', () => {
       todoList.addProject(newProject);
 
       const element = createProjectElement(newProject);
-      element.addEventListener('click', () => {
-        const currProjTitle = document.querySelector('.right-side-panel h1');
-        currProjTitle.innerText = newProject.getName();
-      });
-
       document.querySelector('.projects-section').appendChild(element);
       closeModal();
+
+      Storage.addProject(newProject);
     }
   });
 
@@ -175,6 +260,7 @@ addProjectBtn.addEventListener('click', () => {
 });
 
 const homeProject = document.querySelector('.default-project');
+
 homeProject.addEventListener('click', () => {
   const currProjTitle = document.querySelector('.right-side-panel h1');
   currProjTitle.innerText = 'Home';

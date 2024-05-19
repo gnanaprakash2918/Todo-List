@@ -111,6 +111,12 @@ main {
   margin-bottom: 18px;
 }
 
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .btn:hover {
   background-color: var(--french-gray-2);
 }
@@ -180,4 +186,25 @@ textarea {
 .add-project-modal {
   width: 350px;
   height: 200px;
+}
+
+.task-element {
+  display: flex;
+  height: 140px;
+  gap: 20px;
+  justify-content: space-around;
+  align-self: center;
+}
+
+.task-element > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-btn,
+.status-btn:hover {
+  background-color: var(--slate-gray);
 }

@@ -16,11 +16,16 @@ export default class TodoList {
   }
 
   getProject(projectName) {
-    return this.projects.find((project) => project.getName() === projectName);
+    return this.projects.find((project) => {
+      console.log(project.getName().trim(), projectName.trim());
+      return project.getName().trim() === projectName.trim();
+    });
   }
 
   contains(projectName) {
-    return this.projects.some((project) => project.getName() === projectName);
+    return this.projects.some(
+      (project) => project.getName().trim() === projectName.trim()
+    );
   }
 
   addProject(newProject) {
@@ -31,7 +36,7 @@ export default class TodoList {
   deleteProject(projectName) {
     if (!this.contains(projectName)) return;
     this.projects = this.projects.filter(
-      (project) => project.getName() !== projectName
+      (project) => project.getName().trim() !== projectName.trim()
     );
   }
 }
