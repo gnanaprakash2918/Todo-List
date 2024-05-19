@@ -12,8 +12,10 @@ const closeTaskModalBtn = document.querySelector('.task-close-btn');
 
 addTaskBtn.addEventListener('click', () => {
   modalOverlay.classList.add('bg');
+  addTaskModal.classList.add('visible');
 });
 
 closeTaskModalBtn.addEventListener('click', () => {
   modalOverlay.classList.remove('bg');
+  addTaskModal.classList.remove('visible');
 });

@@ -146,12 +146,14 @@ textarea {
   visibility: visible;
 }
 
-.add-task-modal {
+.modal {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
 
+.add-task-modal {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -162,4 +164,9 @@ textarea {
   border: none;
   border-radius: 8px;
   background-color: whitesmoke;
+  visibility: hidden;
+}
+
+.add-task-modal.visible {
+  visibility: visible;
 }
