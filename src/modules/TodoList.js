@@ -17,7 +17,6 @@ export default class TodoList {
 
   getProject(projectName) {
     return this.projects.find((project) => {
-      console.log(project.getName().trim(), projectName.trim());
       return project.getName().trim() === projectName.trim();
     });
   }

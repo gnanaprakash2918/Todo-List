@@ -13,6 +13,13 @@ const closeModal = () => {
   modalOverlay.innerHTML = '';
 };
 
+function clearTasksList() {
+  const tasksList = document.querySelector('.tasks-list');
+  while (tasksList.childNodes.length > 1) {
+    tasksList.removeChild(tasksList.lastChild);
+  }
+}
+
 function createProjectElement(project) {
   const element = document.createElement('div');
   element.classList.add('home-btn', 'btn');
@@ -28,12 +35,6 @@ function createProjectElement(project) {
   element.appendChild(spanElement);
 
   // event listener
-  element.addEventListener('click', () => {
-    const currProjTitle = document.querySelector('.right-side-panel h1');
-    currProjTitle.innerText = project.getName();
-
-    const tasksList = document.querySelector('.right-side-panel');
-  });
 
   return element;
 }
@@ -159,18 +160,8 @@ addTaskBtn.addEventListener('click', () => {
 
     if (taskName.value.trim() === '') {
       taskName.reportValidity();
-      console.log(taskName);
       return;
     }
-
-    console.log(
-      taskName.value.trim(),
-      dueDate.value.trim(),
-      taskDesc.value.trim(),
-      taskNotes.value.trim(),
-      false,
-      priority.value.trim()
-    );
 
     if (priority.value.trim() === '') priority.value = '2';
 
@@ -182,8 +173,6 @@ addTaskBtn.addEventListener('click', () => {
       false,
       priority.value.trim()
     );
-
-    console.log(newTask);
 
     const currProjTitle = document.querySelector(
       '.right-side-panel h1'
@@ -198,7 +187,6 @@ addTaskBtn.addEventListener('click', () => {
       const projectContainer = document.querySelector('.tasks-list');
       projectContainer.appendChild(element);
 
-      console.log(currProjTitle, todoList);
       Storage.addTask(currProjTitle, newTask);
       closeModal();
     }
@@ -236,7 +224,6 @@ addProjectBtn.addEventListener('click', () => {
 
     if (projectName.value.trim() === '') {
       projectName.reportValidity();
-      console.log(projectName);
       return;
     }
 
@@ -246,6 +233,39 @@ addProjectBtn.addEventListener('click', () => {
       todoList.addProject(newProject);
 
       const element = createProjectElement(newProject);
+
+      element.addEventListener('click', () => {
+        clearTasksList();
+        const currProjTitle = document.querySelector('.right-side-panel h1');
+        currProjTitle.innerText = newProject.getName();
+
+        const tasksList = document.querySelector('.tasks-list');
+
+        const obj = JSON.parse(localStorage.getItem('todoList'));
+
+        const project = obj.projects.find(
+          (p) => p.name === currProjTitle.innerText
+        )['tasks'];
+
+        if (!(Array.isArray(project) && project.length)) {
+          return;
+        }
+
+        for (let i = 0; i < project.length; ++i) {
+          const element = new Task(
+            project[i]['name'],
+            project[i]['dueDate'],
+            project[i]['description'],
+            project[i]['note'],
+            project[i]['completionStatus'],
+            project[i]['priority']
+          );
+
+          const currTask = createTaskElement(element);
+          tasksList.appendChild(currTask);
+        }
+      });
+
       document.querySelector('.projects-section').appendChild(element);
       closeModal();
 
@@ -264,4 +284,30 @@ const homeProject = document.querySelector('.default-project');
 homeProject.addEventListener('click', () => {
   const currProjTitle = document.querySelector('.right-side-panel h1');
   currProjTitle.innerText = 'Home';
+  clearTasksList();
+
+  const tasksList = document.querySelector('.tasks-list');
+  const obj = JSON.parse(localStorage.getItem('todoList'));
+
+  const project = obj.projects.find((p) => p.name === currProjTitle.innerText)[
+    'tasks'
+  ];
+
+  if (!(Array.isArray(project) && project.length)) {
+    return;
+  }
+
+  for (let i = 0; i < project.length; ++i) {
+    const element = new Task(
+      project[i]['name'],
+      project[i]['dueDate'],
+      project[i]['description'],
+      project[i]['note'],
+      project[i]['completionStatus'],
+      project[i]['priority']
+    );
+
+    const currTask = createTaskElement(element);
+    tasksList.appendChild(currTask);
+  }
 });
