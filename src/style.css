@@ -155,6 +155,7 @@ textarea {
   transform: translate(-50%, -50%);
 }
 
+.add-project-modal,
 .add-task-modal {
   display: flex;
   flex-direction: column;
@@ -166,4 +167,10 @@ textarea {
   border: none;
   border-radius: 8px;
   background-color: whitesmoke;
+}
+
+/*Override add project modal width*/
+.add-project-modal {
+  width: 350px;
+  height: 200px;
 }
