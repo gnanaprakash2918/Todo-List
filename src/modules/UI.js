@@ -13,11 +13,6 @@ const closeModal = () => {
   modalOverlay.innerHTML = '';
 };
 
-const changeTitle = (project) => {
-  const currProjTitle = document.querySelector('.right-side-panel h1');
-  currProjTitle.innerText = project;
-};
-
 function createProjectElement(project) {
   const element = document.createElement('div');
   element.classList.add('home-btn', 'btn');
@@ -33,7 +28,6 @@ function createProjectElement(project) {
   element.appendChild(spanElement);
 
   // event listener
-  element.addEventListener('click', changeTitle(project.getName().trim()));
 
   return element;
 }
@@ -164,10 +158,12 @@ addProjectBtn.addEventListener('click', () => {
       todoList.addProject(newProject);
 
       const element = createProjectElement(newProject);
+      element.addEventListener('click', () => {
+        const currProjTitle = document.querySelector('.right-side-panel h1');
+        currProjTitle.innerText = newProject.getName();
+      });
+
       document.querySelector('.projects-section').appendChild(element);
-
-      console.log(todoList);
-
       closeModal();
     }
   });
@@ -178,5 +174,8 @@ addProjectBtn.addEventListener('click', () => {
   });
 });
 
-const homeProject = document.querySelector('.home-btn');
-homeProject.addEventListener('click', changeTitle('Home'));
+const homeProject = document.querySelector('.default-project');
+homeProject.addEventListener('click', () => {
+  const currProjTitle = document.querySelector('.right-side-panel h1');
+  currProjTitle.innerText = 'Home';
+});

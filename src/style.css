@@ -58,7 +58,6 @@ body {
 
 main {
   display: flex;
-  height: 100%;
   background-color: var(--antiflash-white);
   height: calc(100% - 120px);
 }
@@ -67,6 +66,7 @@ main {
   width: 25%;
   flex-direction: column;
   padding: 20px;
+  overflow: scroll;
 }
 
 .right-side-panel {
