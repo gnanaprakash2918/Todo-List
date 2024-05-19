@@ -13,6 +13,31 @@ const closeModal = () => {
   modalOverlay.innerHTML = '';
 };
 
+const changeTitle = (project) => {
+  const currProjTitle = document.querySelector('.right-side-panel h1');
+  currProjTitle.innerText = project;
+};
+
+function createProjectElement(project) {
+  const element = document.createElement('div');
+  element.classList.add('home-btn', 'btn');
+
+  const imgElement = document.createElement('img');
+  imgElement.src = './Images/ham-menu-icon.png';
+  imgElement.alt = 'hamburger-menu-icon';
+
+  const spanElement = document.createElement('span');
+  spanElement.innerHTML = `${project.getName()}`;
+
+  element.appendChild(imgElement);
+  element.appendChild(spanElement);
+
+  // event listener
+  element.addEventListener('click', changeTitle(project.getName().trim()));
+
+  return element;
+}
+
 const addTaskBtn = document.querySelector('.add-task');
 addTaskBtn.addEventListener('click', () => {
   modalOverlay.classList.add('bg');
@@ -134,10 +159,15 @@ addProjectBtn.addEventListener('click', () => {
     }
 
     let newProject = new Project(projectName.value.trim());
-    todoList.addProject(newProject);
 
     if (newProject) {
+      todoList.addProject(newProject);
+
+      const element = createProjectElement(newProject);
+      document.querySelector('.projects-section').appendChild(element);
+
       console.log(todoList);
+
       closeModal();
     }
   });
@@ -149,5 +179,4 @@ addProjectBtn.addEventListener('click', () => {
 });
 
 const homeProject = document.querySelector('.home-btn');
-const currProjTitle = document.querySelector('.right-side-panel h1');
-currProjTitle.innerText = 'Home';
+homeProject.addEventListener('click', changeTitle('Home'));
