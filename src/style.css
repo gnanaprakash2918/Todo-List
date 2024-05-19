@@ -99,6 +99,13 @@ main {
   margin-bottom: 40px;
 }
 
+.projects-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
 .projects-section h2,
 .right-side-panel h1 {
   margin-bottom: 18px;

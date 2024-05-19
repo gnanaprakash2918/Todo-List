@@ -4,7 +4,7 @@ import Task from './Task';
 export default class TodoList {
   constructor() {
     this.projects = [];
-    this.projects.push(new Project('Inbox'));
+    this.projects.push(new Project('Home'));
   }
 
   setProjects(projects) {

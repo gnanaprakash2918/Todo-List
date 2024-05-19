@@ -71,7 +71,6 @@ addTaskBtn.addEventListener('click', () => {
     const priority = document.querySelector('#priority').value;
 
     if (taskName.value.trim() === '') {
-      taskName.style.borderColor = 'red';
       taskName.reportValidity();
       console.log(taskName);
       return;
@@ -125,10 +124,30 @@ addProjectBtn.addEventListener('click', () => {
   const addProjectModal = document.querySelector('.project-add-btn');
   const closeProjectModal = document.querySelector('.project-close-btn');
 
+  addProjectModal.addEventListener('click', () => {
+    const projectName = document.querySelector('#project-name');
+
+    if (projectName.value.trim() === '') {
+      projectName.reportValidity();
+      console.log(projectName);
+      return;
+    }
+
+    let newProject = new Project(projectName.value.trim());
+    todoList.addProject(newProject);
+
+    if (newProject) {
+      console.log(todoList);
+      closeModal();
+    }
+  });
+
   closeProjectModal.addEventListener('click', () => {
     closeModal();
     closeProjectModal.removeEventListener('click', closeModal);
   });
 });
 
-function createTask() {}
+const homeProject = document.querySelector('.home-btn');
+const currProjTitle = document.querySelector('.right-side-panel h1');
+currProjTitle.innerText = 'Home';
