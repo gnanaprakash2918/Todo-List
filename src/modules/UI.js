@@ -5,14 +5,15 @@ import Project from './Project';
 
 // Event Listeners
 
+const modalOverlay = document.querySelector('.overlay');
 const addTaskModal = document.querySelector('.add-task-modal');
 const addTaskBtn = document.querySelector('.add-task');
-const closeTaskModalBtn = document.querySelector('.add-task-modal .btn');
+const closeTaskModalBtn = document.querySelector('.task-close-btn');
 
 addTaskBtn.addEventListener('click', () => {
-  addTaskModal.showModal();
+  modalOverlay.classList.add('bg');
 });
 
 closeTaskModalBtn.addEventListener('click', () => {
-  addTaskModal.close();
+  modalOverlay.classList.remove('bg');
 });

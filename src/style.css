@@ -10,7 +10,12 @@
 body,
 html {
   height: 100%;
+  width: 100%;
   overflow: auto;
+}
+
+body {
+  position: relative;
 }
 
 :root {
@@ -118,9 +123,43 @@ main {
   gap: 1rem;
 }
 
+input,
+select,
+textarea {
+  padding: 8px;
+  text-align: center;
+}
+
+/* Modals */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  visibility: hidden;
+}
+
+.overlay.bg {
+  background-color: rgba(0, 0, 0, 0.7);
+  visibility: visible;
+}
+
 .add-task-modal {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 12px;
+  width: 400px;
+  height: 400px;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background-color: whitesmoke;
 }
