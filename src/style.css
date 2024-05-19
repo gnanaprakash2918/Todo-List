@@ -138,12 +138,14 @@ textarea {
   top: 0;
   left: 0;
   z-index: 3;
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 .overlay.bg {
+  /* visibility: visible; */
+  display: block;
   background-color: rgba(0, 0, 0, 0.7);
-  visibility: visible;
 }
 
 .modal {
@@ -164,9 +166,4 @@ textarea {
   border: none;
   border-radius: 8px;
   background-color: whitesmoke;
-  visibility: hidden;
-}
-
-.add-task-modal.visible {
-  visibility: visible;
 }
