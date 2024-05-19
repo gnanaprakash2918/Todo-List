@@ -3,16 +3,16 @@ import TodoList from './TodoList';
 import Task from './Task';
 import Project from './Project';
 
-let todo = new TodoList();
-todo.addProject(new Project('helo'));
+// Event Listeners
 
-todo.addProject(new Project('manoj'));
+const addTaskModal = document.querySelector('.add-task-modal');
+const addTaskBtn = document.querySelector('.add-task');
+const closeTaskModalBtn = document.querySelector('.add-task-modal .btn');
 
-// console.log(todo);
+addTaskBtn.addEventListener('click', () => {
+  addTaskModal.showModal();
+});
 
-Storage.saveTodoList(todo);
-
-console.log(localStorage);
-todo.deleteProject('manoj');
-
-console.log(Storage.getTodoList());
+closeTaskModalBtn.addEventListener('click', () => {
+  addTaskModal.close();
+});
