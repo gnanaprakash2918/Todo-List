@@ -3,6 +3,7 @@ import TodoList from './TodoList';
 import Task from './Task';
 import Project from './Project';
 
+const todoList = new TodoList();
 // Event Listeners
 
 const modalOverlay = document.querySelector('.overlay');
@@ -54,13 +55,48 @@ addTaskBtn.addEventListener('click', () => {
                 <option value="normal">Normal</option>
                 <option value="high">High</option>
                 </select>
-                <button class="task-add-btn btn">Add</button>
+                <button class="task-add-btn btn" type="submit">Add</button>
                 <button class="task-close-btn btn">Close</button>
                 </div>
   `;
 
-  const addTaskModal = document.querySelector('.add-task-modal');
+  const addTaskModal = document.querySelector('.task-add-btn');
   const closeTaskModalBtn = document.querySelector('.task-close-btn');
+
+  addTaskModal.addEventListener('click', () => {
+    const taskName = document.querySelector('#task-name');
+    const taskDesc = document.querySelector('#task-desc');
+    const taskNotes = document.querySelector('#task-notes');
+    const dueDate = document.querySelector('#due-date');
+    const priority = document.querySelector('#priority').value;
+
+    if (taskName.value.trim() === '') {
+      taskName.style.borderColor = 'red';
+      taskName.reportValidity();
+      console.log(taskName);
+      return;
+    }
+
+    let newTask = new Task(
+      taskName.value.trim(),
+      dueDate.value.trim(),
+      taskDesc.value.trim(),
+      taskNotes.value.trim(),
+      false,
+      priority.value
+    );
+
+    // Get Project idx
+    const projName = 'Inbox';
+    const project = todoList.getProject(projName);
+
+    if (project) {
+      project.addTask(newTask);
+      console.log(todoList.getProject(projName));
+      console.log();
+      closeModal();
+    }
+  });
 
   closeTaskModalBtn.addEventListener('click', () => {
     closeModal();
@@ -94,3 +130,5 @@ addProjectBtn.addEventListener('click', () => {
     closeProjectModal.removeEventListener('click', closeModal);
   });
 });
+
+function createTask() {}
