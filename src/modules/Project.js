@@ -40,7 +40,7 @@ export default class Project {
   }
 
   deleteTask(taskName) {
-    if (!this.contains(newTask.getName())) return;
+    if (!this.contains(taskName)) return;
     this.tasks = this.tasks.filter((task) => {
       return task.getName() !== taskName;
     });

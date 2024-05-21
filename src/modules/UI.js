@@ -90,7 +90,30 @@ function createTaskElement(task) {
   completedBtn.innerText = 'Mark Complete';
   completedBtn.classList.add('status-btn', 'btn');
 
-  completedBtn.addEventListener('click', () => {});
+  completedBtn.addEventListener('click', () => {
+    const getTask = document.querySelector(
+      '.task-element-left:first-child:first-child'
+    ).firstChild;
+
+    const taskName = getTask.innerText;
+    const taskList = Array.from(document.querySelectorAll('.task-element'));
+
+    for (let t = 0; t < taskList.length; ++t) {
+      const currName = taskList[t].querySelector(
+        '.task-element-left:first-child:first-child'
+      ).firstChild.innerText;
+
+      console.log(currName, taskName);
+      if (currName === taskName) {
+        taskList[t].remove();
+        Storage.deleteTask(
+          document.querySelector('div.right-side-panel > h1').innerText,
+          currName.substring(7)
+        );
+        return;
+      }
+    }
+  });
 
   last.appendChild(completedBtn);
 
