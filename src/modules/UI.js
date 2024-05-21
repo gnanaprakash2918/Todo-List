@@ -81,11 +81,15 @@ function createTaskElement(task) {
 
   const priorityDiv = document.createElement('div');
   const prioritySpan = document.createElement('span');
-  prioritySpan.innerText = `Priority : ${task.getPriority()}`;
+  let val = task.getPriority();
+  if (val === '') val = 'Normal';
+
+  prioritySpan.innerText = `Priority : ${val}`;
   priorityDiv.appendChild(prioritySpan);
   right.appendChild(priorityDiv);
 
   const last = document.createElement('div');
+
   const completedBtn = document.createElement('button');
   completedBtn.innerText = 'Mark Complete';
   completedBtn.classList.add('status-btn', 'btn');
@@ -103,7 +107,6 @@ function createTaskElement(task) {
         '.task-element-left:first-child:first-child'
       ).firstChild.innerText;
 
-      console.log(currName, taskName);
       if (currName === taskName) {
         taskList[t].remove();
         Storage.deleteTask(
@@ -115,7 +118,40 @@ function createTaskElement(task) {
     }
   });
 
+  const changePriorityBtn = document.createElement('button');
+  changePriorityBtn.innerText = 'Change Priority';
+  changePriorityBtn.classList.add('priority-btn', 'btn');
+
+  // change priority
+  changePriorityBtn.addEventListener('click', (event) => {
+    const button = event.target;
+
+    let taskElement = button.closest('.task-element');
+
+    const priorityVal = taskElement.querySelector(
+      '.task-element-right > :last-child'
+    ).firstChild;
+
+    const currPriority = priorityVal.textContent.substring(11);
+    console.log(currPriority);
+
+    switch (currPriority) {
+      case 'Low':
+        priorityVal.textContent = 'Priority : Normal';
+        break;
+
+      case 'Normal':
+        priorityVal.textContent = 'Priority : High';
+        break;
+
+      case 'High':
+        priorityVal.textContent = 'Priority : Low';
+        break;
+    }
+  });
+
   last.appendChild(completedBtn);
+  last.appendChild(changePriorityBtn);
 
   div.appendChild(left);
   div.appendChild(right);
@@ -162,9 +198,9 @@ addTaskBtn.addEventListener('click', () => {
                 <!-- <label for="priority">Task Priority</label> -->
                 <select name="priority" id="priority">
                 <option value="" disabled selected>Select Priority</option>
-                <option value="low">Low</option>
-                <option value="normal">Normal</option>
-                <option value="high">High</option>
+                <option value="Low">Low</option>
+                <option value="Normal">Normal</option>
+                <option value="High">High</option>
                 </select>
                 <button class="task-add-btn btn" type="submit">Add</button>
                 <button class="task-close-btn btn">Close</button>
@@ -185,8 +221,6 @@ addTaskBtn.addEventListener('click', () => {
       taskName.reportValidity();
       return;
     }
-
-    if (priority.value.trim() === '') priority.value = '2';
 
     let newTask = new Task(
       taskName.value.trim(),

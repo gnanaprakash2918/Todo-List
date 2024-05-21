@@ -201,10 +201,12 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .status-btn,
-.status-btn:hover {
+.status-btn:hover,
+.priority-btn,
+.priority-btn:hover {
   background-color: var(--slate-gray);
 }
