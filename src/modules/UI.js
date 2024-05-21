@@ -2,6 +2,7 @@ import Storage from './Storage';
 import TodoList from './TodoList';
 import Task from './Task';
 import Project from './Project';
+import deleteBtn from './Images/delete-btn.png';
 
 const todoList = new TodoList();
 // Event Listeners
@@ -28,11 +29,16 @@ function createProjectElement(project) {
   imgElement.src = './Images/ham-menu-icon.png';
   imgElement.alt = 'hamburger-menu-icon';
 
+  const deleteBtn = document.createElement('img');
+  deleteBtn.src = './Images/delete-btn.png';
+  deleteBtn.alt = 'delete-icon';
+
   const spanElement = document.createElement('span');
   spanElement.innerHTML = `${project.getName()}`;
 
   element.appendChild(imgElement);
   element.appendChild(spanElement);
+  element.appendChild(deleteBtn);
 
   // event listener
 
@@ -133,7 +139,6 @@ function createTaskElement(task) {
     ).firstChild;
 
     const currPriority = priorityVal.textContent.substring(11);
-    console.log(currPriority);
 
     switch (currPriority) {
       case 'Low':
