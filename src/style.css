@@ -210,3 +210,14 @@ textarea {
 .priority-btn:hover {
   background-color: var(--slate-gray);
 }
+
+.home-btn,
+.prj-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-self: center;
+}
+
+.home-btn span {
+  text-align: center;
+}

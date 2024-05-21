@@ -2,7 +2,7 @@ import Storage from './Storage';
 import TodoList from './TodoList';
 import Task from './Task';
 import Project from './Project';
-import deleteBtn from './Images/delete-btn.png';
+import deleteBtn from '../Images/delete-btn.png';
 
 const todoList = new TodoList();
 // Event Listeners
@@ -23,7 +23,7 @@ function clearTasksList() {
 
 function createProjectElement(project) {
   const element = document.createElement('div');
-  element.classList.add('home-btn', 'btn');
+  element.classList.add('home-btn', 'btn', 'prj-btn');
 
   const imgElement = document.createElement('img');
   imgElement.src = './Images/ham-menu-icon.png';
